@@ -1,12 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import '../index.css';
 
 const DarkModeContext = createContext();
 
 export const DarkModeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(() => {
-    // Default light mode
-    return localStorage.getItem("darkMode") === "true" ? true : false;
-  });
+  const [darkMode, setDarkMode] = useState(false); // Default: light
 
   useEffect(() => {
     const root = document.documentElement;
@@ -15,7 +13,7 @@ export const DarkModeProvider = ({ children }) => {
     } else {
       root.classList.remove("dark");
     }
-    localStorage.setItem("darkMode", darkMode);
+    // localStorage yo‘q!
   }, [darkMode]);
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);

@@ -10,16 +10,18 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import HeroBanner from "./components/HeroBanner.jsx";
 import Configator from "./components/Configator.jsx";
+import Complect from "./components/Complect.jsx";
 
 library.add(fas, far);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <DarkModeProvider>
+      <App />
       <Header />
       <HeroBanner />
       <Configator />
-      <App />
+      <Complect />
     </DarkModeProvider>
   </StrictMode>
 );
