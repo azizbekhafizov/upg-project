@@ -75,12 +75,12 @@ export default function Complect() {
         {visibleItems.map((item, index) => (
           <div
             key={index}
-            className="bg-gray-100 rounded-xl w-[350px] h-[350px] shadow hover:shadow-lg hover:-translate-y-1 transform transition-all cursor-pointer group"
+            className="bg-gray-100 rounded-xl w-[300px] h-[300px] shadow hover:shadow-lg hover:-translate-y-1 transform transition-all cursor-pointer group"
           >
             <img
               src={item.img}
               alt={item.title}
-              className="h-24 mx-auto mb-4 object-contain transition-transform duration-300 group-hover:scale-105"
+              className=" mx-auto mb-4 object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <h3 className="text-center text-base font-semibold tracking-tight flex justify-center items-center gap-1">
               {item.title}
