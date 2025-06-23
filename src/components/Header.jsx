@@ -11,8 +11,8 @@ const Header = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   const headerClass = darkMode
-    ? "w-full border-b bg-black text-white transition-colors duration-300"
-    : "w-full border-b bg-white text-gray-800 transition-colors duration-300 px-8 ";
+    ? "w-full  bg-black text-white transition-colors duration-300"
+    : "w-full  bg-white text-gray-800 transition-colors duration-300 px-8 ";
 
   const inputClass = darkMode
     ? "w-full border rounded px-4 py-[6px] pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-pink-600 bg-gray-800 text-white"

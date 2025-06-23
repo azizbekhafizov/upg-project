@@ -11,6 +11,8 @@ import { DarkModeProvider } from "./context/DarkModeContext";
 import HeroBanner from "./components/HeroBanner.jsx";
 import Configator from "./components/Configator.jsx";
 import Complect from "./components/Complect.jsx";
+import About from "./components/About.jsx";
+import Podershka from "./components/Podershka.jsx";
 
 library.add(fas, far);
 
@@ -22,6 +24,8 @@ createRoot(document.getElementById("root")).render(
       <HeroBanner />
       <Configator />
       <Complect />
+      <About />
+      <Podershka />
     </DarkModeProvider>
   </StrictMode>
 );

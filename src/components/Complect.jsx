@@ -1,26 +1,34 @@
 import React, { useState } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
-const categories = [
-  // Birinchi sahifa
-  { title: "Мат. Платы", img: "/images/motherboard.png" },
-  { title: "SSD", img: "/images/ssd.png" },
-  { title: "Кулеры", img: "/images/fan.png" },
-  { title: "Блоки питания", img: "/images/psu.png" },
-  { title: "Столы", img: "/images/desk.png" },
-  { title: "Кресла", img: "/images/chair.png" },
-  { title: "Освещение", img: "/images/lights.png" },
-  { title: "Аксессуары", img: "/images/accessories.png" },
+// Rasmlarni import qilish
+import img1 from "../assets/images/img1.png";
+import img2 from "../assets/images/img2.png";
+import img3 from "../assets/images/img3.png";
+import img5 from "../assets/images/img5.png";
+import img6 from "../assets/images/img6.png";
+import img7 from "../assets/images/img7.png";
+import img8 from "../assets/images/img8.png";
+import img9 from "../assets/images/img9.png";
+import konfig from "../assets/images/konfig.png";
 
-  // Ikkinchi sahifa
-  { title: "Ноутбуки", img: "/images/laptop.png" },
-  { title: "Консоли", img: "/images/console.png" },
-  { title: "Контроллеры", img: "/images/controller.png" },
-  { title: "Wi-Fi", img: "/images/router.png" },
-  { title: "Корпуса", img: "/images/case.png" },
-  { title: "Процессоры", img: "/images/cpu.png" },
-  { title: "Видеокарты", img: "/images/gpu.png" },
-  { title: "ОЗУ", img: "/images/ram.png" },
+const categories = [
+  { title: "Мат. Платы", img: img1 },
+  { title: "SSD", img: img2 },
+  { title: "Кулеры", img: img3 },
+  { title: "Блоки питания", img: img5 },
+  { title: "Столы", img: img6 },
+  { title: "Кресла", img: img7 },
+  { title: "Освещение", img: img8 },
+  { title: "Аксессуары", img: img9 },
+  { title: "Ноутбуки", img: konfig },
+  { title: "Консоли", img: img1 },
+  { title: "Контроллеры", img: img2 },
+  { title: "Wi-Fi", img: img3 },
+  { title: "Корпуса", img: img5 },
+  { title: "Процессоры", img: img6 },
+  { title: "Видеокарты", img: img7 },
+  { title: "ОЗУ", img: img8 },
 ];
 
 export default function Complect() {
@@ -42,7 +50,7 @@ export default function Complect() {
   const visibleItems = categories.slice(startIndex, startIndex + visibleCount);
 
   return (
-    <div className="w-full px-6 py-12 bg-white text-black font-sans">
+    <div className="w-full px-6 py-12 bg-white text-black font-sans container">
       {/* Title and Buttons */}
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-4xl font-extrabold tracking-wide uppercase">Комплектующие</h2>

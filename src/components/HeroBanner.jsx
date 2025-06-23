@@ -15,9 +15,9 @@ const images = [
   "https://files.ox-sys.com/cache/original/image/f2/7d/71/f27d712ea98d2379ba43a55f4566f4402d5485edd05bc9cf519bed8c7ca0b76a.jpg",
 ];
 
-const ImageSlider = () => {
+const HeroBanner = () => {
   return (
-    <div className="relative container mx-auto mt-10">
+    <div className="relative container mx-auto mt-12">
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         navigation={{
@@ -53,4 +53,4 @@ const ImageSlider = () => {
   );
 };
 
-export default ImageSlider;
+export default HeroBanner;
