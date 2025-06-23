@@ -17,7 +17,7 @@ const images = [
 
 const HeroBanner = () => {
   return (
-    <div className="relative container mx-auto mt-12">
+    <div className="relative w-full max-w-[1400px] mx-auto mt-4 rounded-xl overflow-hidden shadow-lg">
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         navigation={{
@@ -26,28 +26,35 @@ const HeroBanner = () => {
         }}
         pagination={{
           clickable: true,
+          bulletClass: 'swiper-pagination-bullet',
+          bulletActiveClass: 'swiper-pagination-bullet-active',
         }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
         loop={true}
-        className="!pb-12 relative [&_.swiper-pagination]:md:flex hidden"
+        className="!pb-10"
       >
         {images.map((src, i) => (
           <SwiperSlide key={i}>
             <img
               src={src}
-              className="w-full h-auto object-cover"
+              alt={`slide-${i}`}
+              className="w-full h-[500px] object-cover"
             />
           </SwiperSlide>
         ))}
 
-        <div className="absolute bottom-16 right-4 z-10  gap-2 lg:flex hidden">
-          <button className="swiper-prev cursor-pointer bg-[#ff0096] flex justify-center items-center text-white w-15 h-15">
-            <FaArrowLeftLong size={25} />
+        {/* Navigation buttons */}
+        <div className="absolute top-1/2 -translate-y-1/2 w-full px-6 flex justify-between items-center z-10">
+          <button className="swiper-prev w-12 h-12 rounded-full bg-pink-600 hover:bg-pink-700 text-white flex items-center justify-center shadow-md transition hidden md:flex">
+            <FaArrowLeftLong size={20} />
           </button>
-          <button className="swiper-next cursor-pointer bg-[#ff0096] flex justify-center items-center text-white w-15 h-15">
-            <FaArrowRightLong size={25} />
+          <button className="swiper-next w-12 h-12 rounded-full bg-pink-600 hover:bg-pink-700 text-white flex items-center justify-center shadow-md transition hidden md:flex">
+            <FaArrowRightLong size={20} />
           </button>
         </div>
+
+        {/* Pagination */}
+        <div className="swiper-pagination !bottom-4 flex justify-center gap-2" />
       </Swiper>
     </div>
   );

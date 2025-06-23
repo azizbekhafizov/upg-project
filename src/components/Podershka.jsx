@@ -51,7 +51,7 @@ export default function Podershka() {
         {supportData.map((item, index) => (
           <div
             key={index}
-            className={`p-6 flex flex-col items-center text-center gap-3 border border-gray-200 bg-gray-100`}
+            className={`p-6 flex flex-col items-center text-center gap-3 border border-gray-200 bg-gray-100 hover:bg-gray-200 transition-all cursor-pointer `}
           >
             {item.icon}
             <div className="text-gray-800 font-semibold">{item.title}</div>
@@ -67,7 +67,7 @@ export default function Podershka() {
         {reviewData.map((item, index) => (
           <div
             key={index}
-            className="p-6 flex flex-col gap-2 border border-gray-200 bg-gray-100 text-left justify-between"
+            className="p-6 flex flex-col gap-2 border border-gray-200 bg-gray-100 text-left justify-between hover:bg-gray-200 transition-all cursor-pointer"
           >
             <div className="text-pink-500 font-semibold">{item.title}</div>
             {item.value ? (

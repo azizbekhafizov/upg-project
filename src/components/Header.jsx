@@ -56,7 +56,7 @@ const Header = () => {
           <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faHeart} />
             <span>Избранное</span>
-            <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">1</span>
+            <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
           </div>
           <div className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faShoppingCart} />

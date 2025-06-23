@@ -75,7 +75,7 @@ export default function Complect() {
         {visibleItems.map((item, index) => (
           <div
             key={index}
-            className="bg-gray-100 rounded-xl w-[300px] h-[300px] shadow hover:shadow-lg hover:-translate-y-1 transform transition-all cursor-pointer group"
+            className="bg-gray-100 rounded-xl w-[300px] h-[320px] shadow hover:shadow-lg hover:-translate-y-1 transform transition-all cursor-pointer group"
           >
             <img
               src={item.img}

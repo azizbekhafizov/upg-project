@@ -35,7 +35,7 @@ export default function About() {
         {features.map((item, index) => (
           <div
             key={index}
-            className={`flex flex-col items-center justify-center text-center p-6 gap-2 bg-white
+            className={`flex flex-col items-center justify-center text-center p-6 gap-2 bg-white border border-gray-200 hover:bg-gray-100 transition-all cursor-pointer
             }`}
           >
             <div className="text-pink-500 font-medium">
