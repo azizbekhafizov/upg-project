@@ -13,6 +13,8 @@ import Configator from "./components/Configator.jsx";
 import Complect from "./components/Complect.jsx";
 import About from "./components/About.jsx";
 import Podershka from "./components/Podershka.jsx";
+import ProductsSection from "./components/ProductsSection.jsx";
+import Footer from "./components/Footer.jsx";
 
 library.add(fas, far);
 
@@ -22,10 +24,12 @@ createRoot(document.getElementById("root")).render(
       <App />
       <Header />
       <HeroBanner />
+      <ProductsSection />
       <Configator />
       <Complect />
       <About />
       <Podershka />
+      <Footer />
     </DarkModeProvider>
   </StrictMode>
 );
