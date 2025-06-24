@@ -1,100 +1,29 @@
 "use client";
 import { useState } from "react";
 import { Heart, Scale, Star, ShoppingCart } from "lucide-react";
-import img1 from "../assets/images/img1.png";
+import products from "../data/Product.json";
+import products2 from "../data/Products2.json";
 
 export default function ProductsSection() {
   const [favorites, setFavorites] = useState(new Set());
   const [compareList, setCompareList] = useState(new Set());
 
-  const products = [
-    {
-      id: 1,
-      name: "Brateck LDT69-C022 Black",
-      brand: "Brateck",
-      price: "1 110 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-pink-500",
-    },
-    {
-      id: 2,
-      name: "DarkProject ALU87 Daylight",
-      brand: "Dark Project",
-      price: "1 175 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-pink-500",
-    },
-    {
-      id: 3,
-      name: "DarkProject ALU87 Midnight",
-      brand: "Dark Project",
-      price: "1 175 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-pink-500",
-    },
-    {
-      id: 4,
-      name: "DarkProject ALU87 Violet",
-      brand: "Dark Project",
-      price: "849 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-pink-500",
-    },
-    {
-      id: 5,
-      name: "HyperX Cloud III Red Wireless",
-      brand: "HyperX",
-      price: "2 100 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-pink-500",
-    },
-    {
-      id: 6,
-      name: "Logitech G Pro X Superlight",
-      brand: "Logitech",
-      price: "1 850 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-blue-500",
-    },
-    {
-      id: 7,
-      name: "Razer DeathAdder V3 Pro",
-      brand: "Razer",
-      price: "1 650 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-green-500",
-    },
-    {
-      id: 8,
-      name: "SteelSeries Arctis Nova Pro",
-      brand: "SteelSeries",
-      price: "2 850 000",
-      image: img1,
-      rating: 0,
-      brandColor: "bg-orange-500",
-    },
-  ];
+  const formatPrice = (price) =>
+    price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
-  const toggleFavorite = (productId) => {
+  const toggleFavorite = (productTitle) => {
     const newFavorites = new Set(favorites);
-    newFavorites.has(productId)
-      ? newFavorites.delete(productId)
-      : newFavorites.add(productId);
+    newFavorites.has(productTitle)
+      ? newFavorites.delete(productTitle)
+      : newFavorites.add(productTitle);
     setFavorites(newFavorites);
   };
 
-  const toggleCompare = (productId) => {
+  const toggleCompare = (productTitle) => {
     const newCompareList = new Set(compareList);
-    newCompareList.has(productId)
-      ? newCompareList.delete(productId)
-      : newCompareList.add(productId);
+    newCompareList.has(productTitle)
+      ? newCompareList.delete(productTitle)
+      : newCompareList.add(productTitle);
     setCompareList(newCompareList);
   };
 
@@ -109,7 +38,7 @@ export default function ProductsSection() {
     ));
   };
 
-  const renderProductGrid = (title) => (
+  const renderProductGrid = (title, productList) => (
     <>
       <div className="mb-8 mt-16">
         <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2">
@@ -117,31 +46,31 @@ export default function ProductsSection() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-        {products.map((product) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-[1300px] mx-auto">
+        {productList.map((product, index) => (
           <div
-            key={product.id}
+            key={index}
             className="bg-white rounded-2xl shadow-sm hover:shadow-xl duration-300 border border-gray-100 overflow-hidden group w-full"
           >
             <div className="relative p-4 bg-gray-50 group-hover:bg-gray-100 transition-colors duration-300">
               <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
                 <button
-                  onClick={() => toggleFavorite(product.id)}
+                  onClick={() => toggleFavorite(product.title)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                    favorites.has(product.id)
+                    favorites.has(product.title)
                       ? "bg-pink-500 text-white shadow-lg"
                       : "bg-white text-gray-400 hover:text-pink-500 hover:bg-pink-50 shadow-md"
                   }`}
                 >
                   <Heart
                     className="w-4 h-4"
-                    fill={favorites.has(product.id) ? "currentColor" : "none"}
+                    fill={favorites.has(product.title) ? "currentColor" : "none"}
                   />
                 </button>
                 <button
-                  onClick={() => toggleCompare(product.id)}
+                  onClick={() => toggleCompare(product.title)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                    compareList.has(product.id)
+                    compareList.has(product.title)
                       ? "bg-blue-500 text-white shadow-lg"
                       : "bg-white text-gray-400 hover:text-blue-500 hover:bg-blue-50 shadow-md"
                   }`}
@@ -153,7 +82,7 @@ export default function ProductsSection() {
               <div className="aspect-[4/3] flex items-center justify-center">
                 <img
                   src={product.image}
-                  alt={product.name}
+                  alt={product.title}
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -161,17 +90,15 @@ export default function ProductsSection() {
 
             <div className="p-4 space-y-3">
               <h3 className="font-medium text-gray-900 text-sm leading-tight h-10 overflow-hidden">
-                {product.name}
+                {product.title}
               </h3>
 
               <div className="flex items-center gap-1">
-                {renderStars(product.rating)}
+                {renderStars(product.rating || 0)}
               </div>
 
               <div className="flex justify-start">
-                <span
-                  className={`${product.brandColor} text-white text-xs px-3 py-1 rounded-full font-medium inline-block`}
-                >
+                <span className={`bg-pink-500 text-white text-xs px-3 py-1 rounded-full font-medium inline-block`}>
                   {product.brand}
                 </span>
               </div>
@@ -179,12 +106,7 @@ export default function ProductsSection() {
               <div className="space-y-1">
                 <p className="text-xs text-gray-500">Цена:</p>
                 <p className="text-lg font-bold text-pink-500">
-                  {product.price.split(" ").map((part, index) => (
-                    <span key={index} className="mr-1">
-                      {part}
-                    </span>
-                  ))}
-                  <span className="text-sm">UZS</span>
+                  {formatPrice(product.price)} <span className="text-sm">{product.currency}</span>
                 </p>
               </div>
 
@@ -201,8 +123,8 @@ export default function ProductsSection() {
 
   return (
     <section className="container mx-auto px-4 py-12">
-      {renderProductGrid("НОВИНКИ")}
-      {renderProductGrid("Лучшие предложения")}
+      {renderProductGrid("НОВИНКИ", products)}
+      {renderProductGrid("Лучшие предложения", products2)}
     </section>
   );
 }
