@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const [cartCount, setCartCount] = useState(0);
+  const [wishlistCount, setWishlistCount] = useState(0);
 
   useEffect(() => {
     const updateCartCount = () => {
@@ -25,19 +26,34 @@ const Header = () => {
       setCartCount(totalItems);
     };
 
+    const updateWishlistCount = () => {
+      const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      setWishlistCount(wishlist.length);
+    };
+
     updateCartCount();
+    updateWishlistCount();
+
     window.addEventListener("storage", updateCartCount);
-    return () => window.removeEventListener("storage", updateCartCount);
+    window.addEventListener("storage", updateWishlistCount);
+
+    return () => {
+      window.removeEventListener("storage", updateCartCount);
+      window.removeEventListener("storage", updateWishlistCount);
+    };
   }, []);
 
   return (
     <header className="w-full container bg-white text-gray-800 transition-colors duration-300">
       {/* 1-qator */}
       <div className="flex justify-between items-center px-4 py-2">
-        <div className="text-2xl font-bold">
-          <span className="text-gray-900">UPG</span>
-          <span className="text-pink-600">RADE</span>
-        </div>
+        <Link to="/">
+          <div className="text-2xl font-bold">
+            <span className="text-gray-900">UPG</span>
+            <span className="text-pink-600">RADE</span>
+          </div>
+        </Link>
+
         <div className="flex-1 max-w-lg mx-8">
           <div className="relative">
             <input
@@ -51,12 +67,16 @@ const Header = () => {
             />
           </div>
         </div>
+
         <div className="flex items-center gap-5 text-sm">
+          {/* Currency */}
           <div className="flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faWallet} />
             <span>UZS/USD</span>
           </div>
-          <Link to="productList">
+
+          {/* Compare */}
+          <Link to="/productList">
             <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
               <FontAwesomeIcon icon={faSlidersH} />
               <span>Сравнение</span>
@@ -65,16 +85,22 @@ const Header = () => {
               </span>
             </div>
           </Link>
-          <Link to="wishlist">
+
+          {/* Wishlist */}
+          <Link to="/wishlist">
             <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
               <FontAwesomeIcon icon={faHeart} />
               <span>Избранное</span>
-              <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                0
-              </span>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {wishlistCount}
+                </span>
+              )}
             </div>
           </Link>
-          <Link to="cart" className="relative">
+
+          {/* Cart */}
+          <Link to="/cart" className="relative">
             <div className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
               <FontAwesomeIcon icon={faShoppingCart} />
               <span>Корзина</span>
@@ -85,15 +111,24 @@ const Header = () => {
               )}
             </div>
           </Link>
+
+          {/* Contacts */}
           <div className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faCommentDots} />
             <span>Контакты</span>
           </div>
+
+          {/* Theme toggle */}
           <div className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faSun} />
             <span>Тема</span>
           </div>
-          <Link to="/account" className="flex flex-col mt-2 w-9 h-9 border rounded-full items-center justify-center hover:border-pink-600 cursor-pointer">
+
+          {/* Account */}
+          <Link
+            to="/account"
+            className="flex flex-col mt-2 w-9 h-9 border rounded-full items-center justify-center hover:border-pink-600 cursor-pointer"
+          >
             <FontAwesomeIcon icon={faUser} className="text-lg" />
           </Link>
         </div>
@@ -115,8 +150,12 @@ const Header = () => {
             <span>Купить компьютер</span>
           </div>
           <span className="cursor-pointer hover:text-pink-600">Новинки</span>
-          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">HyperX</span>
-          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">Все бренды</span>
+          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
+            HyperX
+          </span>
+          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
+            Все бренды
+          </span>
         </div>
       </div>
     </header>

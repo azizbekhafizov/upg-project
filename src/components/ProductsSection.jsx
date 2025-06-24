@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Heart, Scale, Star, ShoppingCart } from "lucide-react";
 import products from "../data/Product.json";
 import products2 from "../data/Products2.json";
@@ -8,15 +8,25 @@ export default function ProductsSection() {
   const [favorites, setFavorites] = useState(new Set());
   const [compareList, setCompareList] = useState(new Set());
 
-  const formatPrice = (price) =>
-    price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("wishlist")) || [];
+    setFavorites(new Set(stored.map((item) => item.title)));
+  }, []);
 
-  const toggleFavorite = (title) => {
-    const newFavorites = new Set(favorites);
-    newFavorites.has(title)
-      ? newFavorites.delete(title)
-      : newFavorites.add(title);
-    setFavorites(newFavorites);
+  const toggleFavorite = (product) => {
+    const stored = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const exists = stored.find((item) => item.title === product.title);
+
+    let updated;
+    if (exists) {
+      updated = stored.filter((item) => item.title !== product.title);
+    } else {
+      updated = [...stored, product];
+    }
+
+    localStorage.setItem("wishlist", JSON.stringify(updated));
+    setFavorites(new Set(updated.map((item) => item.title)));
+    window.dispatchEvent(new Event("storage")); // Headerni yangilash uchun signal
   };
 
   const toggleCompare = (title) => {
@@ -38,11 +48,11 @@ export default function ProductsSection() {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("storage")); // headerga signal
+    window.dispatchEvent(new Event("storage"));
   };
 
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
+  const renderStars = (rating) =>
+    Array.from({ length: 5 }, (_, i) => (
       <Star
         key={i}
         className={`w-4 h-4 ${
@@ -50,14 +60,11 @@ export default function ProductsSection() {
         }`}
       />
     ));
-  };
 
   const renderProductGrid = (title, productList) => (
     <>
       <div className="mb-8 mt-16">
-        <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2">
-          {title}
-        </h2>
+        <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2">{title}</h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-[1300px] mx-auto">
@@ -69,7 +76,7 @@ export default function ProductsSection() {
             <div className="relative p-4 bg-gray-50 group-hover:bg-gray-100 transition-colors duration-300">
               <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
                 <button
-                  onClick={() => toggleFavorite(product.title)}
+                  onClick={() => toggleFavorite(product)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                     favorites.has(product.title)
                       ? "bg-pink-500 text-white shadow-lg"
@@ -78,11 +85,10 @@ export default function ProductsSection() {
                 >
                   <Heart
                     className="w-4 h-4"
-                    fill={
-                      favorites.has(product.title) ? "currentColor" : "none"
-                    }
+                    fill={favorites.has(product.title) ? "currentColor" : "none"}
                   />
                 </button>
+
                 <button
                   onClick={() => toggleCompare(product.title)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
@@ -108,9 +114,7 @@ export default function ProductsSection() {
               <h3 className="font-medium text-gray-900 text-sm leading-tight h-10 overflow-hidden">
                 {product.title}
               </h3>
-              <div className="flex items-center gap-1">
-                {renderStars(product.rating || 0)}
-              </div>
+              <div className="flex items-center gap-1">{renderStars(product.rating || 0)}</div>
               <div className="flex justify-start">
                 <span className="bg-pink-500 text-white text-xs px-3 py-1 rounded-full font-medium inline-block">
                   {product.brand}
@@ -119,7 +123,7 @@ export default function ProductsSection() {
               <div className="space-y-1">
                 <p className="text-xs text-gray-500">Цена:</p>
                 <p className="text-lg font-bold text-pink-500">
-                  {formatPrice(product.price)}{" "}
+                  {product.price.toLocaleString()}{" "}
                   <span className="text-sm">{product.currency}</span>
                 </p>
               </div>
@@ -127,7 +131,8 @@ export default function ProductsSection() {
                 onClick={() => addToCart(product)}
                 className="w-full bg-pink-500 hover:bg-pink-200 hover:text-pink-600 cursor-pointer text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
               >
-                <ShoppingCart className="w-4 h-4" />В корзину
+                <ShoppingCart className="w-4 h-4" />
+                В корзину
               </button>
             </div>
           </div>
