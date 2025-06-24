@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
@@ -13,18 +14,30 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
-import { List } from "lucide-react";
 
 const Header = () => {
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      setCartCount(totalItems);
+    };
+
+    updateCartCount();
+    window.addEventListener("storage", updateCartCount);
+    return () => window.removeEventListener("storage", updateCartCount);
+  }, []);
+
   return (
     <header className="w-full container bg-white text-gray-800 transition-colors duration-300">
-      {/* 1-qator: logo, search, icons */}
+      {/* 1-qator */}
       <div className="flex justify-between items-center px-4 py-2">
         <div className="text-2xl font-bold">
           <span className="text-gray-900">UPG</span>
           <span className="text-pink-600">RADE</span>
         </div>
-
         <div className="flex-1 max-w-lg mx-8">
           <div className="relative">
             <input
@@ -38,13 +51,12 @@ const Header = () => {
             />
           </div>
         </div>
-
         <div className="flex items-center gap-5 text-sm">
           <div className="flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faWallet} />
             <span>UZS/USD</span>
           </div>
-          <List to="productList">
+          <Link to="productList">
             <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
               <FontAwesomeIcon icon={faSlidersH} />
               <span>Сравнение</span>
@@ -52,7 +64,7 @@ const Header = () => {
                 0
               </span>
             </div>
-          </List>
+          </Link>
           <Link to="wishlist">
             <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
               <FontAwesomeIcon icon={faHeart} />
@@ -62,10 +74,15 @@ const Header = () => {
               </span>
             </div>
           </Link>
-          <Link to="cart">
+          <Link to="cart" className="relative">
             <div className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
               <FontAwesomeIcon icon={faShoppingCart} />
               <span>Корзина</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-2 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </div>
           </Link>
           <div className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
@@ -76,16 +93,13 @@ const Header = () => {
             <FontAwesomeIcon icon={faSun} />
             <span>Тема</span>
           </div>
-          <Link
-            to="/account"
-            className="flex flex-col mt-2 w-9 h-9 border rounded-full items-center justify-center hover:border-pink-600 cursor-pointer"
-          >
+          <Link to="/account" className="flex flex-col mt-2 w-9 h-9 border rounded-full items-center justify-center hover:border-pink-600 cursor-pointer">
             <FontAwesomeIcon icon={faUser} className="text-lg" />
           </Link>
         </div>
       </div>
 
-      {/* 2-qator: menyular */}
+      {/* 2-qator */}
       <div className="flex items-center px-4 py-2 gap-6 text-sm text-gray-700">
         <button className="flex items-center gap-2 bg-pink-600 text-white px-4 py-2 rounded">
           <FontAwesomeIcon icon={faTh} />
@@ -101,12 +115,8 @@ const Header = () => {
             <span>Купить компьютер</span>
           </div>
           <span className="cursor-pointer hover:text-pink-600">Новинки</span>
-          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
-            HyperX
-          </span>
-          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
-            Все бренды
-          </span>
+          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">HyperX</span>
+          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">Все бренды</span>
         </div>
       </div>
     </header>

@@ -11,28 +11,42 @@ export default function ProductsSection() {
   const formatPrice = (price) =>
     price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
-  const toggleFavorite = (productTitle) => {
+  const toggleFavorite = (title) => {
     const newFavorites = new Set(favorites);
-    newFavorites.has(productTitle)
-      ? newFavorites.delete(productTitle)
-      : newFavorites.add(productTitle);
+    newFavorites.has(title)
+      ? newFavorites.delete(title)
+      : newFavorites.add(title);
     setFavorites(newFavorites);
   };
 
-  const toggleCompare = (productTitle) => {
+  const toggleCompare = (title) => {
     const newCompareList = new Set(compareList);
-    newCompareList.has(productTitle)
-      ? newCompareList.delete(productTitle)
-      : newCompareList.add(productTitle);
+    newCompareList.has(title)
+      ? newCompareList.delete(title)
+      : newCompareList.add(title);
     setCompareList(newCompareList);
   };
 
+  const addToCart = (product) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex((item) => item.title === product.title);
+
+    if (index > -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("storage")); // headerga signal
+  };
+
   const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, index) => (
+    return Array.from({ length: 5 }, (_, i) => (
       <Star
-        key={index}
+        key={i}
         className={`w-4 h-4 ${
-          index < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+          i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
         }`}
       />
     ));
@@ -64,7 +78,9 @@ export default function ProductsSection() {
                 >
                   <Heart
                     className="w-4 h-4"
-                    fill={favorites.has(product.title) ? "currentColor" : "none"}
+                    fill={
+                      favorites.has(product.title) ? "currentColor" : "none"
+                    }
                   />
                 </button>
                 <button
@@ -92,27 +108,26 @@ export default function ProductsSection() {
               <h3 className="font-medium text-gray-900 text-sm leading-tight h-10 overflow-hidden">
                 {product.title}
               </h3>
-
               <div className="flex items-center gap-1">
                 {renderStars(product.rating || 0)}
               </div>
-
               <div className="flex justify-start">
-                <span className={`bg-pink-500 text-white text-xs px-3 py-1 rounded-full font-medium inline-block`}>
+                <span className="bg-pink-500 text-white text-xs px-3 py-1 rounded-full font-medium inline-block">
                   {product.brand}
                 </span>
               </div>
-
               <div className="space-y-1">
                 <p className="text-xs text-gray-500">Цена:</p>
                 <p className="text-lg font-bold text-pink-500">
-                  {formatPrice(product.price)} <span className="text-sm">{product.currency}</span>
+                  {formatPrice(product.price)}{" "}
+                  <span className="text-sm">{product.currency}</span>
                 </p>
               </div>
-
-              <button className="w-full bg-pink-500 hover:bg-pink-200 hover:text-pink-600 cursor-pointer text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2">
-                <ShoppingCart className="w-4 h-4" />
-                В корзину
+              <button
+                onClick={() => addToCart(product)}
+                className="w-full bg-pink-500 hover:bg-pink-200 hover:text-pink-600 cursor-pointer text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+              >
+                <ShoppingCart className="w-4 h-4" />В корзину
               </button>
             </div>
           </div>
