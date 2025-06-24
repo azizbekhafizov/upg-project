@@ -1,18 +1,28 @@
 import { useDarkMode } from "../context/DarkModeContext";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faSearch, faWallet, faSlidersH, faShoppingCart,
-  faCommentDots, faSun, faMoon, faUser, faTh,
-  faCogs, faDesktop
+  faSearch,
+  faWallet,
+  faSlidersH,
+  faShoppingCart,
+  faCommentDots,
+  faSun,
+  faMoon,
+  faUser,
+  faTh,
+  faCogs,
+  faDesktop,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "lucide-react";
 
 const Header = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   const headerClass = darkMode
-    ? "w-full  bg-black text-white transition-colors duration-300"
-    : "w-full  bg-white text-gray-800 transition-colors duration-300 px-8 ";
+    ? "w-full container  bg-black text-white transition-colors duration-300"
+    : "w-full container  bg-white text-gray-800 transition-colors duration-300 ";
 
   const inputClass = darkMode
     ? "w-full border rounded px-4 py-[6px] pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-pink-600 bg-gray-800 text-white"
@@ -51,12 +61,16 @@ const Header = () => {
           <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faSlidersH} />
             <span>Сравнение</span>
-            <span className="absolute -top-2 -right-0.5 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+            <span className="absolute -top-2 -right-0.5 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+              0
+            </span>
           </div>
           <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faHeart} />
             <span>Избранное</span>
-            <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+            <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+              0
+            </span>
           </div>
           <div className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faShoppingCart} />
@@ -66,13 +80,16 @@ const Header = () => {
             <FontAwesomeIcon icon={faCommentDots} />
             <span>Контакты</span>
           </div>
-          <div onClick={toggleDarkMode} className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600">
+          <div
+            onClick={toggleDarkMode}
+            className="flex flex-col mt-2 items-center gap-1 cursor-pointer hover:text-pink-600"
+          >
             <FontAwesomeIcon icon={darkMode ? faMoon : faSun} />
             <span>Тема</span>
           </div>
-          <div className="flex flex-col mt-2 w-9 h-9 border rounded-full items-center justify-center hover:border-pink-600 cursor-pointer">
-            <FontAwesomeIcon icon={faUser} className="text-lg" />
-          </div>
+<Link to="/account" className="flex flex-col mt-2 w-9 h-9 border rounded-full items-center justify-center hover:border-pink-600 cursor-pointer">
+  <FontAwesomeIcon icon={faUser} className="text-lg" />
+</Link>
         </div>
       </div>
 
@@ -92,8 +109,12 @@ const Header = () => {
             <span>Купить компьютер</span>
           </div>
           <span className="cursor-pointer hover:text-pink-600">Новинки</span>
-          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">HyperX</span>
-          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">Все бренды</span>
+          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
+            HyperX
+          </span>
+          <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
+            Все бренды
+          </span>
         </div>
       </div>
     </header>

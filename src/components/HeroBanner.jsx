@@ -17,7 +17,7 @@ const images = [
 
 const HeroBanner = () => {
   return (
-    <div className="relative w-full max-w-[1400px] mx-auto mt-4 rounded-xl overflow-hidden shadow-lg">
+    <div className=" container relative w-full max-w-[1400px] mx-auto mt-4 rounded-xl overflow-hidden shadow-lg">
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         navigation={{

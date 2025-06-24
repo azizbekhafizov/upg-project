@@ -1,0 +1,20 @@
+[
+  {
+    "code": "UZ",
+    "name": "Uzbekistan",
+    "dial_code": "+998",
+    "flag": "🇺🇿"
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "dial_code": "+1",
+    "flag": "🇺🇸"
+  },
+  {
+    "code": "RU",
+    "name": "Russia",
+    "dial_code": "+7",
+    "flag": "🇷🇺"
+  }
+]
