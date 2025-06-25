@@ -144,14 +144,16 @@ const Header = () => {
             <FontAwesomeIcon icon={faCogs} />
             <span>Конфигуратор</span>
           </div>
-              <Link to='/kupit'>
-              
-                        <div className="flex items-center gap-1 cursor-pointer hover:text-pink-600">
-            <FontAwesomeIcon icon={faDesktop} />
-            <span>Купить компьютер</span>
-          </div>
-              </Link>
-          <span className="cursor-pointer hover:text-pink-600">Новинки</span>
+          <Link to="/kupit">
+            <div className="flex items-center gap-1 cursor-pointer hover:text-pink-600">
+              <FontAwesomeIcon icon={faDesktop} />
+              <span>Купить компьютер</span>
+            </div>
+          </Link>
+          <Link to='/novinki'>
+          
+              <span className="cursor-pointer hover:text-pink-600">Новинки</span>
+          </Link>
           <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
             HyperX
           </span>

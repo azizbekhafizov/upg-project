@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import data from "../data/kupit.json";
 import { Heart, Scale, ShoppingCart, Star } from "lucide-react";
-import { FiChevronUp, FiChevronDown } from "react-icons/fi";
+import { FiChevronUp, FiChevronDown, FiSettings } from "react-icons/fi";
 
 export default function Kupit() {
   const [products, setProducts] = useState([]);
@@ -111,17 +111,20 @@ export default function Kupit() {
   return (
     <div className="flex p-6 gap-6 bg-white text-black">
       {/* FILTER PANEL */}
-     <div
-  className={`w-64 border rounded p-4 space-y-4 transition-all duration-300 ${
-    filterOpen ? "max-h-[500px]" : "max-h-[60px] overflow-hidden"
-  }`}
->
+      <div
+        className={`w-[320px] border border-gray-200 rounded p-4 space-y-4 transition-all duration-300 ${
+          filterOpen ? "max-h-[300px]" : "max-h-[60px] overflow-hidden"
+        }`}
+      >
         <div
           className="flex justify-between items-center cursor-pointer"
           onClick={() => setFilterOpen((prev) => !prev)}
         >
           <h2 className="font-bold text-lg flex items-center gap-2">
-            <span className="inline-block w-4 h-4">⚙️</span> Фильтр
+            <span className="inline-block w-4 h-4">
+              <FiSettings />
+            </span>{" "}
+            Фильтр
           </h2>
           {filterOpen ? (
             <FiChevronUp className="text-xl" />
@@ -138,7 +141,7 @@ export default function Kupit() {
                 <input
                   type="number"
                   placeholder="От"
-                  className="border px-2 py-1 w-full"
+                  className="border border-gray-200 outline-0 px-4 py-1 w-full"
                   onChange={(e) =>
                     setPriceRange((prev) => ({ ...prev, min: e.target.value }))
                   }
@@ -146,7 +149,7 @@ export default function Kupit() {
                 <input
                   type="number"
                   placeholder="До"
-                  className="border px-2 py-1 w-full"
+                  className="border border-gray-200 outline-0 px-4 py-1 w-full"
                   onChange={(e) =>
                     setPriceRange((prev) => ({ ...prev, max: e.target.value }))
                   }
@@ -173,14 +176,14 @@ export default function Kupit() {
       <div className="flex-1">
         <div className="flex justify-end mb-4">
           <select
-            className="border px-3 py-2"
+            className="px-4 py-2 rounded-xl border border-gray-300 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300 cursor-pointer"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
           >
-            <option value="az">Название (A - Z)</option>
-            <option value="za">Название (Z - A)</option>
-            <option value="priceLowHigh">Цена (низкая → высокая)</option>
-            <option value="priceHighLow">Цена (высокая → низкая)</option>
+            <option value="az"> Название (A - Z)</option>
+            <option value="za"> Название (Z - A)</option>
+            <option value="priceLowHigh"> Цена (низкая → высокая)</option>
+            <option value="priceHighLow"> Цена (высокая → низкая)</option>
           </select>
         </div>
 
