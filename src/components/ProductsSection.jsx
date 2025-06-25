@@ -29,13 +29,22 @@ export default function ProductsSection() {
     window.dispatchEvent(new Event("storage")); // Headerni yangilash uchun signal
   };
 
-  const toggleCompare = (title) => {
-    const newCompareList = new Set(compareList);
-    newCompareList.has(title)
-      ? newCompareList.delete(title)
-      : newCompareList.add(title);
-    setCompareList(newCompareList);
-  };
+const toggleCompare = (product) => {
+  const stored = JSON.parse(localStorage.getItem("compare")) || [];
+  const exists = stored.find((item) => item.title === product.title);
+
+  let updated;
+  if (exists) {
+    updated = stored.filter((item) => item.title !== product.title);
+  } else {
+    updated = [...stored, product];
+  }
+
+  localStorage.setItem("compare", JSON.stringify(updated));
+  setCompareList(new Set(updated.map((item) => item.title)));
+  window.dispatchEvent(new Event("storage")); // Header uchun signal
+};
+
 
   const addToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -50,6 +59,8 @@ export default function ProductsSection() {
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(new Event("storage"));
   };
+
+  
 
   const renderStars = (rating) =>
     Array.from({ length: 5 }, (_, i) => (
@@ -90,7 +101,7 @@ export default function ProductsSection() {
                 </button>
 
                 <button
-                  onClick={() => toggleCompare(product.title)}
+                  onClick={() => toggleCompare(product)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                     compareList.has(product.title)
                       ? "bg-blue-500 text-white shadow-lg"

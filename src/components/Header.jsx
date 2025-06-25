@@ -18,28 +18,25 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
+  const [compareCount, setCompareCount] = useState(0);
 
   useEffect(() => {
-    const updateCartCount = () => {
+    const updateCounts = () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const compare = JSON.parse(localStorage.getItem("compare")) || [];
+
       const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
       setCartCount(totalItems);
-    };
-
-    const updateWishlistCount = () => {
-      const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
       setWishlistCount(wishlist.length);
+      setCompareCount(compare.length);
     };
 
-    updateCartCount();
-    updateWishlistCount();
-
-    window.addEventListener("storage", updateCartCount);
-    window.addEventListener("storage", updateWishlistCount);
+    updateCounts();
+    window.addEventListener("storage", updateCounts);
 
     return () => {
-      window.removeEventListener("storage", updateCartCount);
-      window.removeEventListener("storage", updateWishlistCount);
+      window.removeEventListener("storage", updateCounts);
     };
   }, []);
 
@@ -80,9 +77,11 @@ const Header = () => {
             <div className="relative flex flex-col items-center mt-2 gap-1 cursor-pointer hover:text-pink-600">
               <FontAwesomeIcon icon={faSlidersH} />
               <span>Сравнение</span>
-              <span className="absolute -top-2 -right-0.5 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                0
-              </span>
+              {compareCount > 0 && (
+                <span className="absolute -top-2 -right-0.5 bg-pink-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {compareCount}
+                </span>
+              )}
             </div>
           </Link>
 
@@ -145,10 +144,13 @@ const Header = () => {
             <FontAwesomeIcon icon={faCogs} />
             <span>Конфигуратор</span>
           </div>
-          <div className="flex items-center gap-1 cursor-pointer hover:text-pink-600">
+              <Link to='/kupit'>
+              
+                        <div className="flex items-center gap-1 cursor-pointer hover:text-pink-600">
             <FontAwesomeIcon icon={faDesktop} />
             <span>Купить компьютер</span>
           </div>
+              </Link>
           <span className="cursor-pointer hover:text-pink-600">Новинки</span>
           <span className="cursor-pointer text-pink-600 border-b-2 border-pink-600">
             HyperX

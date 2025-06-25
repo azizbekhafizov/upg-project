@@ -11,23 +11,26 @@ export default function Cart() {
     setCartItems(storedCart);
   }, []);
 
-  const formatPrice = (price) =>
-    price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  const formatPrice = (price) => {
+    if (typeof price !== "number" || isNaN(price)) return "0";
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  };
 
   const updateCart = (updatedItems) => {
     setCartItems(updatedItems);
     localStorage.setItem("cart", JSON.stringify(updatedItems));
+    window.dispatchEvent(new Event("storage"));
   };
 
   const increaseQty = (index) => {
     const updated = [...cartItems];
-    updated[index].quantity += 1;
+    updated[index].quantity = (updated[index].quantity || 1) + 1;
     updateCart(updated);
   };
 
   const decreaseQty = (index) => {
     const updated = [...cartItems];
-    if (updated[index].quantity > 1) {
+    if ((updated[index].quantity || 1) > 1) {
       updated[index].quantity -= 1;
     } else {
       updated.splice(index, 1);
@@ -38,12 +41,14 @@ export default function Cart() {
   const clearCart = () => {
     localStorage.removeItem("cart");
     setCartItems([]);
+    window.dispatchEvent(new Event("storage"));
   };
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const totalPrice = cartItems.reduce((total, item) => {
+    const price = typeof item.price === "number" ? item.price : 0;
+    const qty = typeof item.quantity === "number" ? item.quantity : 1;
+    return total + price * qty;
+  }, 0);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -92,7 +97,7 @@ export default function Cart() {
                         <FaMinus />
                       </button>
                       <span className="text-lg font-semibold">
-                        {item.quantity}
+                        {item.quantity || 1}
                       </span>
                       <button
                         onClick={() => increaseQty(index)}
@@ -106,10 +111,11 @@ export default function Cart() {
 
                 <div className="text-right">
                   <p className="text-pink-500 text-xl font-bold">
-                    {formatPrice(item.price * item.quantity)} {item.currency}
+                    {formatPrice((item.price || 0) * (item.quantity || 1))}{" "}
+                    {item.currency || "UZS"}
                   </p>
                   <p className="text-sm text-gray-400 mt-1">
-                    ({formatPrice(item.price)} за шт.)
+                    ({formatPrice(item.price || 0)} за шт.)
                   </p>
                   <button
                     onClick={() => decreaseQty(index)}

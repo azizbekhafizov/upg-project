@@ -20,6 +20,7 @@ import Complect from "./components/Complect";
 import About from "./components/About";
 import Podershka from "./components/Podershka";
 import ProductsSection from "./components/ProductsSection";
+import Compare__productsList from "./components/Compare__productsList";
 
 export default function App() {
   return (
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/account" element={<Login />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/productlist" element={<Compare__productsList />} />
       </Routes>
 
       <Footer />

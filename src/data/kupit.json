@@ -1,0 +1,82 @@
+
+
+[
+  {
+    "title": "Бюджетная сборка | 12100F/1660S/16GB/256GB",
+    "price": "5 611 500 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/3b/a6/8e/3ba68ee20d40c0e17ec63b295221495fd6d1a10329cf29d230baa07f5e62d5a8.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #1 | 12100F/1650/16GB/512GB",
+    "price": "4 973 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/a0/ab/f7/a0abf70d344ae4837bde8a5b5f1aabc5fb165e964727a856b690588dd63876e1.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #10 | 1265K/5090/32GB/512GB",
+    "price": "65 918 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/74/c7/6d/74c76d8799d6e78745fc59c4fb1c7ca8f8b938bc846acb8d7ecd4e5bb03e8270.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #11 | 7800X3D/5070TI/32GB/512GB",
+    "price": "30 218 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/ea/e7/cb/eae7cbad343e18e9c8c5e2f2d3bf50f85ded0c42f5e23ce0e7bdcef14cee0e95.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #12 | i9800X3D/5080/32GB/512GB",
+    "price": "38 187 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/da/fc/94/dafc941124b643f0d89307c362f2854be109c8f4b81a9fcd62a8eb7578e06c8a.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #2 | I12400F/3050/16GB/512GB",
+    "price": "6 439 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/c1/89/0f/c1890fb2e660061a05edd8c857d8bec1c34a2e33c56ee208da467a78a5535630.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #3 | I2400F/4060/16GB/512GB",
+    "price": "9 180 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/4b/78/59/4b7859dcc5e02b1c36aa678fd4bc1f73b5c76133fd4db6ea9f8170648cffd76d.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #4 | 13400F/4060TI/16GB/512GB",
+    "price": "11 348 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/1e/d2/58/1ed2584a51da65cf2afe032b84e714fb9eb76ad7c32751e7452fe55cc18ef15f.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #5 | I14600KF/5060TI/16GB/512GB",
+    "price": "14 025 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/21/6a/1e/216a1e5ed70062d4a9bc81141f3e8d446794fc5a4a32bb42a244b7864795727a.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #6 | 13700F/4070S/32GB/512GB",
+    "price": "20 400 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/b8/bb/39/b8bb3969fe7ff3325eaa7fe7c80885e5c4e29d9244e5e96a9a1c8f83c7f4fb45.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #7 | 14700KF/5070/32GB/512GB",
+    "price": "22 313 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/7e/8e/6e/7e8e6e608e130a639305d70658ee768b945bfb6cf23d41aaf83208743ad96cbf.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #8 | I4900K/5080/32GB/512GB",
+    "price": "35 254 000 UZS",
+    "image": "https://files.ox-sys.com/cache/500x_/image/5b/20/12/5b2012d2d3afc3c78551969614e09c2fa7765f8f835d38f6a8b584b9c8b55d76.png",
+    "upgrade": true
+  },
+  {
+    "title": "Сборка #9 (Qo‘shilmagan edi rasmda)",
+    "price": "Noma’lum",
+    "image": "https://files.ox-sys.com/cache/500x_/image/28/12/22/281222d0af6834cf6b888b18f43f1cf3b120f70967ed9fa3cc7049a4a582ffc8.png",
+    "upgrade": false
+  }
+]
